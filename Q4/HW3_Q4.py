@@ -114,14 +114,14 @@ def failure1(graph,batchsize,percent):
     N = graph.GetNodes()
     stopN = (percent*N)/100 # number of nodes at which to stop
     X = [0]
-    Y = [GetBfsEffDiam_PUNGraph(graph,dia_sample)]
+    Y = [GetBfsFullDiam_PUNGraph(graph,dia_sample)]
     nodeset = set(range(N))
     while True:   # start deleting
         for d in sample(nodeset,batchsize):
             graph.DelNode(d)
             nodeset.remove(d)
         del_nodes += batchsize
-        dia = GetBfsEffDiam_PUNGraph(graph,dia_sample)
+        dia = GetBfsFullDiam_PUNGraph(graph,dia_sample)
         X.append((100.0*del_nodes)/N)
         Y.append(dia)
         if del_nodes >= stopN: break
@@ -139,7 +139,7 @@ def attack1(graph,batchsize,percent):
     N = graph.GetNodes()
     stopN = (percent*N)/100 # number of nodes at which to stop
     X = [0]
-    Y = [GetBfsEffDiam_PUNGraph(graph,dia_sample)]
+    Y = [GetBfsFullDiam_PUNGraph(graph,dia_sample)]
     nodeset = set(range(N))
     while True:   # start deleting
         for i in xrange(batchsize):
@@ -147,7 +147,7 @@ def attack1(graph,batchsize,percent):
             graph.DelNode(d)
             nodeset.remove(d)
         del_nodes += batchsize
-        dia = GetBfsEffDiam_PUNGraph(graph,dia_sample)
+        dia = GetBfsFullDiam_PUNGraph(graph,dia_sample)
         X.append((100.0*del_nodes)/N)
         Y.append(dia)
         if del_nodes >= stopN: break
